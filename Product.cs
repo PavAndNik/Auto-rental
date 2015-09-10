@@ -7,4 +7,5 @@ public interface Product : BusinesObject
     public string Type { get; set; }
     public string Producer { get; set; }
     public int Discount { get; set; }
+    public int CountPrise() { }
 }
