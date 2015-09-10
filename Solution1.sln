@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{182FDC14-93AC-404C-9856-166411035C7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{9B1E53DB-2085-4BEE-874B-9319A87B351C}"
+	ProjectSection(SolutionItems) = preProject
+		BusinesObject.cs = BusinesObject.cs
+		Product.cs = Product.cs
+		User.cs = User.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Classes", "Classes", "{FFC24688-622A-4C35-A7EA-BA21F39C78E5}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9B1E53DB-2085-4BEE-874B-9319A87B351C} = {182FDC14-93AC-404C-9856-166411035C7C}
+		{FFC24688-622A-4C35-A7EA-BA21F39C78E5} = {182FDC14-93AC-404C-9856-166411035C7C}
+	EndGlobalSection
+EndGlobal
