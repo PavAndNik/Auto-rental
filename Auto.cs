@@ -1,4 +1,4 @@
-﻿using CarRental.Interfaces;
+﻿using CarRental.Model.BasicModel;
 using System;
 
 
@@ -6,12 +6,10 @@ using System;
 
 public class Auto : Product
 {
-    enum TransmissionType { Automatic, Manual};
+    enum TransmissionType { Automatic, Manual, Robot};
     enum EngineType { Benzine,Diesel,Gas,Electro};
 
     public int CatalogID { get; set; }
-
-    public int ClientID { get; set; }
 
     public int EngineCapacity { get; set; } //Объем двигателя
     

@@ -1,5 +1,5 @@
 ﻿using System;
-using CarRental.Interfaces;
+using CarRental.Model.BasicModel;
 
 public class CatalogTrailers:BusinesObject
 {

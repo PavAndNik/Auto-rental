@@ -1,4 +1,4 @@
-﻿using CarRental.Interfaces;
+﻿using CarRental.Model.BasicModel;
 
 public class Trailer:Product
 {

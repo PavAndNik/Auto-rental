@@ -7,4 +7,5 @@ public interface User:BusinesObject
     public string Email { get; set; }
     public string DateOfBirth { get; set; }
     public string Surname { get; set; }
+    public bool IsAdmin { get; }
 }
