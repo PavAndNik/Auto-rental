@@ -8,6 +8,6 @@ public class Client : User
 
     public string PassportNumber { get; set; }
 
-    public List<Product> Product { get; set; }
+    public List<Order> Orders { get; set; }
 
 }

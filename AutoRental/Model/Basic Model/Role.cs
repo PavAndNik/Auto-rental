@@ -2,6 +2,6 @@
 public class Role
 {
 
-    public int NameRole { get; set; }
+    public int Name { get; set; }
 
 }
