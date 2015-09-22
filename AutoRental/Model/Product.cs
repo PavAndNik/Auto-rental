@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoRental.Model;
+using System;
+using System.Collections.Generic;
 
 public class Product : BusinesObject
 {
@@ -10,4 +12,5 @@ public class Product : BusinesObject
     public string Producer { get; set; }
     public int Discount { get; set; }
     public Decimal Price { get; set; }
+    public List<Characteristic> Characteristics {get; set; }
 }

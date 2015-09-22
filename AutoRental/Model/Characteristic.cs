@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoRental.Model
 {
-    class Characteristic
+    public class Characteristic
     {
         enum TransmissionType { Automatic, Manual, Robot };
         enum EngineType { Benzine, Diesel, Gas, Electro };
