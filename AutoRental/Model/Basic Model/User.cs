@@ -8,4 +8,5 @@ public abstract class User:BusinesObject
     public string DateOfBirth { get; set; }
     public string Surname { get; set; }
     public bool IsAdmin { get; }
+    public Role UserRole { get; }
 }

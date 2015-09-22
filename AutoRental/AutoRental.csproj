@@ -46,6 +46,7 @@
     <Compile Include="Model\CatalogProduct.cs" />
     <Compile Include="Model\Characteristic.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\CommonInformation.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
