@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Order
+public class Order: BusinesObject
 {
     public List<Product> ListOfProducts { get; set; }
     public Decimal FullPrice { get; set; }
