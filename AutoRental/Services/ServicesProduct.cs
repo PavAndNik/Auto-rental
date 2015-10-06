@@ -8,37 +8,54 @@ namespace AutoRental.Services
 {
     class ServicesProduct
     {
-        private List<Product> ListOfProduct = new List<Product>();
-        public void AddProduct(Product NewProduct)
+        private static List<Product> listOfProduct = new List<Product>();
+
+        public Product Get(int id)
         {
-            NewProduct.Id = ListOfProduct.Last<Product>().Id+1;
-            ListOfProduct.Add(NewProduct);
+            return listOfProduct.SingleOrDefault(item => item.Id == id);
         }
-        public Product GetProduct(string ID)
+
+        public List<Product> Get()
         {
-            foreach(Product p in ListOfProduct)
-            {
-                if (p.Id == ID)
-                    return p;
-            }
-            return null;
+            return listOfProduct;
         }
-        public void DeleteProduct(string ID)
+
+        public Product Add(Product ProductForAdd)
         {
-            foreach (Product p in ListOfProduct)
-            {
-                if (p.Id == ID)
-                    ListOfProduct.Remove(p);
-            }
+            ProductForAdd.Id = listOfProduct.Any() ? listOfProduct.Max(item => item.Id) + 1 : 1;
+            listOfProduct.Add(ProductForAdd);
+            return ProductForAdd;
         }
-        public void UpdateProduct(Product P)
+
+        public Product Update(Product productForUpdate)
         {
-            int index = ListOfProduct.IndexOf(P);
-            if (index != -1)
+            var product = this.Get(productForUpdate.Id);
+            if (product == null)
             {
-                ListOfProduct[index] = P;
+                throw new NullReferenceException();
             }
-            else AddProduct(P);
+
+            product.Name = productForUpdate.Name;
+            product.Price = productForUpdate.Price;
+            product.Producer = productForUpdate.Producer;
+            product.Type = productForUpdate.Type;
+            product.Characteristics = productForUpdate.Characteristics;
+            product.Cost = productForUpdate.Cost;
+            product.DateOfCreation = productForUpdate.DateOfCreation;
+            product.Discount = productForUpdate.Discount;
+
+            return product;
+        }
+
+        public void Delete(int id)
+        {
+            var product = this.Get(id);
+            if (product == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            listOfProduct.Remove(product);
         }
     }
 }
