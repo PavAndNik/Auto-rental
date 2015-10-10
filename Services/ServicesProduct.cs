@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRental.Services
 {
-    class ServicesProduct
+    public class ServicesProduct
     {
         private static List<Product> listOfProduct = new List<Product>();
 

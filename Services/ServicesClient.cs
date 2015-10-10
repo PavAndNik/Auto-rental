@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 
 namespace Services
 {
-    class ServicesClient
+   public  class ServicesClient
     {
         private static List<Client> listOfClient = new List<Client>();
         public Client Get(int id)
