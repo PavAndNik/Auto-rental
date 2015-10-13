@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Services;
 using System.Linq;
 
+
 namespace ServicesTest
 {
     [TestClass]
@@ -15,12 +16,21 @@ namespace ServicesTest
             service = new ServicesClient();
             service.Add(new Client
             {
-                Name = "Client2",
-                Login = "Client",
+                Name = "Client1",
+                Login = "Client1",
                 Password = "1234",
                 Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
-                Surname = "SClient",
+                DateOfBirth = new DateTime(1999,12,1),
+                Surname = "SClient1",
+            });
+            service.Add(new Client
+            {
+                Name = "Client2",
+                Login = "Client2",
+                Password = "1234",
+                Email = "Clien2@gmail.com",
+                DateOfBirth = new DateTime(1999, 12, 1),
+                Surname = "SClient2",
             });
         }
 
@@ -85,7 +95,7 @@ namespace ServicesTest
                 Login = "Client",
                 Password = "1234",
                 Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
+                DateOfBirth = new DateTime(11,11,11),
                 Surname = "SClient",
                 PassportNumber = "1234567890"
             });
@@ -123,7 +133,7 @@ namespace ServicesTest
                 Login = "Client",
                 Password = "1234",
                 Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
+                DateOfBirth = new DateTime(11,11,11),
                 Surname = "SClient",
                 PassportNumber = "1234567890"
             });

@@ -55,6 +55,10 @@
     <Compile Include="ServicesProductTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoRental\AutoRental.csproj">
+      <Project>{dcd7e286-c080-421e-824e-8ff3de1977e5}</Project>
+      <Name>AutoRental</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{6d45fc9f-81cc-45de-ac37-7391263439db}</Project>
       <Name>Services</Name>
