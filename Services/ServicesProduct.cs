@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoRental.Services
+namespace Services
 {
     public class ServicesProduct
     {
