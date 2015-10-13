@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="ServicesClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesProductTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoRental\AutoRental.csproj">
