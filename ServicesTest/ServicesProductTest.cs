@@ -2,25 +2,31 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Services;
 using System.Linq;
+using System.Collections.Generic;
+using AutoRental.Model;
+
 
 namespace ServicesTest
 {
     [TestClass]
     public class ServicesProductTest
     {
+
         private ServicesProduct service;
 
         public ServicesProductTest()
         {
-            service = new ServicesClient();
-            service.Add(new Client
+            service = new ServicesProduct();
+            service.Add(new Product
             {
-                Name = "Client2",
-                Login = "Client",
-                Password = "1234",
-                Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
-                Surname = "SClient",
+                Name = "Product",
+                Price = 300,
+                Producer = "1234",
+                Type = "car",
+                Cost = 300,
+                DateOfCreation = new DateTime(12, 12, 12),
+                Discount = 50,
+
             });
         }
 
@@ -34,17 +40,17 @@ namespace ServicesTest
         [TestMethod]
         public void GetItemTest()
         {
-            const int clientId = 1;
-            var client = service.Get(clientId);
-            Assert.IsNotNull(client);
-            Assert.AreEqual(client.Id, clientId);
+            const int productId = 1;
+            var product = service.Get(productId);
+            Assert.IsNotNull(product);
+            Assert.AreEqual(product.Id, productId);
         }
 
         [TestMethod]
         public void GetItemNotFoundTest()
         {
-            var client = service.Get(int.MaxValue);
-            Assert.IsNull(client);
+            var product = service.Get(int.MaxValue);
+            Assert.IsNull(product);
         }
 
         [TestMethod]
@@ -52,19 +58,17 @@ namespace ServicesTest
         {
             var items = service.Get().ToArray();
             var guid = Guid.NewGuid().ToString();
-            var guPassw = Guid.NewGuid().ToString();
-            var guSurname = Guid.NewGuid().ToString();
-            var guPassportNumber = Guid.NewGuid().ToString();
-            var client = new Client
+            var guProducer = Guid.NewGuid().ToString();
+            var guType = Guid.NewGuid().ToString();
+            var product = new Product
             {
                 Name = guid,
-                Password = guPassw,
-                Surname = guSurname,
-                PassportNumber = guPassportNumber
+                Producer = guProducer,
+                Type = guType,
 
             };
 
-            service.Add(client);
+            service.Add(product);
 
             var newItems = service.Get();
             Assert.IsTrue(items.Length + 1 == newItems.Count);
@@ -79,15 +83,15 @@ namespace ServicesTest
         [TestMethod]
         public void UpdateItemTest()
         {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Client
+            var item = service.Get().FirstOrDefault() ?? service.Add(new Product
             {
-                Name = "Test",
-                Login = "Client",
-                Password = "1234",
-                Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
-                Surname = "SClient",
-                PassportNumber = "1234567890"
+                Name = "Product",
+                Price = 300,
+                Producer = "1234",
+                Type = "car",
+                Cost = 300,
+                DateOfCreation = new DateTime(12, 12, 12),
+                Discount = 50,
             });
 
             var guid = Guid.NewGuid().ToString();
@@ -105,27 +109,27 @@ namespace ServicesTest
         [ExpectedException(typeof(NullReferenceException))]
         public void UpdateItemNotFoundTest()
         {
-            var notFoundClient = new Client
+            var notFoundProduct = new Product
             {
                 Id = int.MaxValue,
                 Name = "Some name"
             };
 
-            service.Update(notFoundClient);
+            service.Update(notFoundProduct);
         }
 
         [TestMethod]
         public void DeleteItemTest()
         {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Client
+            var item = service.Get().FirstOrDefault() ?? service.Add(new Product
             {
-                Name = "Test",
-                Login = "Client",
-                Password = "1234",
-                Email = "Client@gmail.com",
-                DateOfBirth = "11.11.11",
-                Surname = "SClient",
-                PassportNumber = "1234567890"
+                Name = "Product",
+                Price = 300,
+                Producer = "1234",
+                Type = "car",
+                Cost = 300,
+                DateOfCreation = new DateTime(12, 12, 12),
+                Discount = 50,
             });
             service.Delete(item.Id);
             var deletedItem = service.Get(item.Id);
