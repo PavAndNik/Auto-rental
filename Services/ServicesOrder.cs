@@ -10,7 +10,7 @@ namespace Services
 
         public Order Get(int id)
         {
-            return listOfOrders.SingleOrDefault(item => item.Id == id);
+            return (Order)listOfOrders.SingleOrDefault(item => item.Id == id).Clone();
         }
 
         public List<Order> Get()
@@ -22,7 +22,7 @@ namespace Services
         {
             OrderForAdd.Id = listOfOrders.Any() ? listOfOrders.Max(item => item.Id) + 1 : 1;
             listOfOrders.Add(OrderForAdd);
-            return OrderForAdd;
+            return (Order)OrderForAdd.Clone();
         }
 
         public Order Update(Order OrderForUpdate)
@@ -39,7 +39,7 @@ namespace Services
             Order.Buyer = OrderForUpdate.Buyer;
             Order.DateOfOrder = OrderForUpdate.DateOfOrder;
 
-            return Order;
+            return (Order)Order.Clone();
         }
 
         public void Delete(int id)

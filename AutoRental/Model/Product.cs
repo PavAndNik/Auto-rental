@@ -13,4 +13,9 @@ public class Product : BusinesObject
     public int Discount { get; set; }
     public Decimal Price { get; set; }
     public List<Characteristic> Characteristics {get; set; }
+
+    public override object Clone()
+    {
+        throw new NotImplementedException();
+    }
 }

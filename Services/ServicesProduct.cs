@@ -10,7 +10,7 @@ namespace Services
 
         public Product Get(int id)
         {
-            return listOfProduct.SingleOrDefault(item => item.Id == id);
+            return (Product)listOfProduct.SingleOrDefault(item => item.Id == id).Clone();
         }
 
         public List<Product> Get()
@@ -22,7 +22,7 @@ namespace Services
         {
             ProductForAdd.Id = listOfProduct.Any() ? listOfProduct.Max(item => item.Id) + 1 : 1;
             listOfProduct.Add(ProductForAdd);
-            return ProductForAdd;
+            return (Product)ProductForAdd.Clone();
         }
 
         public Product Update(Product productForUpdate)
@@ -42,7 +42,7 @@ namespace Services
             product.DateOfCreation = productForUpdate.DateOfCreation;
             product.Discount = productForUpdate.Discount;
 
-            return product;
+            return (Product)product.Clone();
         }
 
         public void Delete(int id)

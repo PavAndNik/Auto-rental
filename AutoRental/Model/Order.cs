@@ -11,4 +11,9 @@ public class Order: BusinesObject
 	{ 
         ListOfProducts = new List<Product>();
 	}
+
+    public override object Clone()
+    {
+        throw new NotImplementedException();
+    }
 }

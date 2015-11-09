@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace AutoRental.Model
 {
-    public class Characteristic:BusinesObject
+    public class Characteristic : BusinesObject
     {
-
+        public override object Clone()
+        {
+            return new Characteristic
+            {
+                Id = this.Id,
+                Name = this.Name
+            };
+        }
     }
 }

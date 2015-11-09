@@ -11,7 +11,7 @@ namespace Services
         private static List<Client> listOfClient = new List<Client>();
         public Client Get(int id)
         {
-            return listOfClient.SingleOrDefault(item => item.Id == id);
+            return (Client)listOfClient.SingleOrDefault(item => item.Id == id).Clone();
         }
         public List<Client> Get()
         {
@@ -21,7 +21,7 @@ namespace Services
         {
             clientForAdd.Id = listOfClient.Any() ? listOfClient.Max(item => item.Id) + 1 : 1;
             listOfClient.Add(clientForAdd);
-            return clientForAdd;
+            return (Client)clientForAdd.Clone();
         }
         public Client Update(Client clientForUpdate)
         {
@@ -41,7 +41,7 @@ namespace Services
             client.Password = clientForUpdate.Password;
             client.PhoneNumber = clientForUpdate.PhoneNumber;
             client.Surname = clientForUpdate.Surname;
-            return client;
+            return (Client)client.Clone();
         }
         public void Delete(int id)
         {
