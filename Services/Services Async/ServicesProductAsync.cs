@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-   public class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
+    class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
     {
-        public async Task<Product> AddAsync(Product o)
+        public async Task<Product> Add(Product o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -36,7 +36,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<Product> UpdateAsync(Product o)
+        public async Task<Product> Update(Product o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -45,7 +45,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task Delete(int id)
         {
             await Task.Factory.StartNew(() =>
             {

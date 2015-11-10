@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-   public class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
+    class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
     {
         public async Task<Client> AddAsync(Client o)
         {
@@ -28,7 +28,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<List<Client>> GetAsync()
+        public async Task<List<Client>> GeAsync()
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -37,7 +37,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<Client> UpdateAsync(Client o)
+        public async Task<Client> Updatc(Client o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -46,7 +46,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task Deletc(int id)
         {
             await Task.Factory.StartNew(() =>
             {
