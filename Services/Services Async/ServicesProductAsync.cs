@@ -9,7 +9,7 @@ namespace Services.Services_Async
 {
     class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
     {
-        public async Task<Product> Add(Product o)
+        public async Task<Product> AddAsync(Product o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -36,7 +36,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<Product> Update(Product o)
+        public async Task<Product> UpdateAsync(Product o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -45,7 +45,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             await Task.Factory.StartNew(() =>
             {

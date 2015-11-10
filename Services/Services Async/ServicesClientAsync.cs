@@ -28,7 +28,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<List<Client>> GeAsync()
+        public async Task<List<Client>> GetAsync()
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -37,7 +37,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<Client> Updatc(Client o)
+        public async Task<Client> UpdateAsync(Client o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -46,7 +46,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task Deletc(int id)
+        public async Task DeleteAsync(int id)
         {
             await Task.Factory.StartNew(() =>
             {

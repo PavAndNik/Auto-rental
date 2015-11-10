@@ -10,8 +10,8 @@ namespace Services.Services_Async
     {
         Task<List<T>> GetAsync();
         Task<T> GetAsync(int id);
-        Task<T> Add(T o);
-        Task<T> Update(T o);
-        Task Delete(int id);
+        Task<T> AddAsync(T o);
+        Task<T> UpdateAsync(T o);
+        Task DeleteAsync(int id);
     }
 }
