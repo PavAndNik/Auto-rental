@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace ServicesTest
 {
     [TestClass]
-    class ServicesOrderTest
+    public class ServicesOrderTest
     {
         private ServicesOrder service;
 

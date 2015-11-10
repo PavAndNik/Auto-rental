@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-    class ServicesOrderAsync : ServicesOrder, IServicesAsync<Order>
+   public class ServicesOrderAsync : ServicesOrder, IServicesAsync<Order>
     {
         public async Task<Order> AddAsync(Order o)
         {

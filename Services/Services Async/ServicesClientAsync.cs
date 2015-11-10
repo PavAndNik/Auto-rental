@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-    class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
+   public class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
     {
         public async Task<Client> AddAsync(Client o)
         {
