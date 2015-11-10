@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services.Services_Async;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-    class ServicesClientAsync : ServicesClient, IServicesAsync
+    class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
     {
-        public async Task<Client> Add(Client o)
+        public async Task<Client> AddAsync(Client o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -27,7 +28,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<List<Client>> GetListAsync()
+        public async Task<List<Client>> GetAsync()
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -36,7 +37,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async Task<Client> Update(Client o)
+        public async Task<Client> UpdateAsync(Client o)
         {
             return await Task.Factory.StartNew(() =>
             {
@@ -45,7 +46,7 @@ namespace Services.Services_Async
             });
         }
 
-        public async void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             await Task.Factory.StartNew(() =>
             {
