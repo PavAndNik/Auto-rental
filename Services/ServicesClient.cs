@@ -11,7 +11,9 @@ namespace Services
         private static List<Client> listOfClient = new List<Client>();
         public Client Get(int id)
         {
-            return (Client)listOfClient.SingleOrDefault(item => item.Id == id).Clone();
+            foreach (Client c in listOfClient)
+                if (c.Id == id) return (Client)c.Clone();
+            return null;
         }
         public List<Client> Get()
         {
@@ -45,12 +47,10 @@ namespace Services
         }
         public void Delete(int id)
         {
-            var client = this.Get(id);
-            if (client == null)
-            {
-                throw new NullReferenceException();
-            }
-            listOfClient.Remove(client);
+            Client client = listOfClient.SingleOrDefault(item => item.Id == id);
+                         if (client == null) throw new NullReferenceException();
+                        listOfClient.Remove(client);
+
         }
     }
 }

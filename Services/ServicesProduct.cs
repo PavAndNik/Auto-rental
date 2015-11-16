@@ -10,7 +10,9 @@ namespace Services
 
         public Product Get(int id)
         {
-            return (Product)listOfProduct.SingleOrDefault(item => item.Id == id).Clone();
+            foreach (Product p in listOfProduct)
+                if (p.Id == id) return (Product)p.Clone();
+            return null;
         }
 
         public List<Product> Get()
@@ -47,12 +49,8 @@ namespace Services
 
         public void Delete(int id)
         {
-            var product = this.Get(id);
-            if (product == null)
-            {
-                throw new NullReferenceException();
-            }
-
+            Product product = listOfProduct.SingleOrDefault(item => item.Id == id);
+            if (product == null) throw new NullReferenceException();
             listOfProduct.Remove(product);
         }
     }

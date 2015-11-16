@@ -14,6 +14,14 @@ public class Order: BusinesObject
 
     public override object Clone()
     {
-        throw new NotImplementedException();
+        return new Order
+        {
+            Id = this.Id,
+            Name = this.Name,
+            ListOfProducts = this.ListOfProducts,
+            FullPrice = this.FullPrice,
+            Buyer = this.Buyer,
+            DateOfOrder = this.DateOfOrder
+        };
     }
 }

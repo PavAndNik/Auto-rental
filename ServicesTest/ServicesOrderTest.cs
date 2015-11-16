@@ -9,131 +9,130 @@ namespace ServicesTest
     [TestClass]
     public class ServicesOrderTest
     {
-        private ServicesOrder service;
+        private readonly ServicesOrder service;
 
         public ServicesOrderTest()
         {
-            service = new ServicesOrder();
+            this.service = new ServicesOrder();
+            service.Add(new Order
+            {
+                Name = "Order1",
+                FullPrice = 10000,
+                Buyer = new Client(),
+                DateOfOrder = new DateTime(2015, 11, 11),
+                ListOfProducts = new List<Product>()
+            });
             service.Add(new Order
             {
                 Name = "Order2",
-                ListOfProducts = new List<Product>(),
-                FullPrice = 1234,
+                FullPrice = 20000,
                 Buyer = new Client(),
-                DateOfOrder = new DateTime(1222,12,24),
+                DateOfOrder = new DateTime(2015, 10, 10),
+                ListOfProducts = new List<Product>()
             });
         }
+        [TestMethod]
+        public void AddTest()
+        {
+          
+            string name = Guid.NewGuid().ToString();
+            int price = 1000001;
+            Client buyer = new Client();
+             DateTime  dateOfOrder = new DateTime(2015, 10, 10);
+            List<Product> listOfProducts = new List<Product>();
 
+            Order newOrder = new Order { Name = name, FullPrice = price, Buyer = buyer, DateOfOrder = dateOfOrder, ListOfProducts =listOfProducts };
+            Order addedOrder = service.Add(newOrder);
+            Assert.IsNotNull(addedOrder);
+            Assert.IsTrue(addedOrder.Id > 0);
+            Assert.AreEqual(addedOrder.FullPrice, price);
+            Assert.AreEqual(addedOrder.Buyer, buyer);
+            Assert.AreEqual(addedOrder.DateOfOrder, dateOfOrder);
+            Assert.AreEqual(addedOrder.Name, name);
+            Assert.AreEqual(addedOrder.ListOfProducts, listOfProducts);
+        }
+
+        [TestMethod]
+        public void GetByIdTest()
+        {
+            Order order = service.Get(1);
+            Assert.IsNotNull(order);
+            Assert.AreEqual(order.Id, 1);
+        }
+        [TestMethod]
+        public void GetByIdEditTest()
+        {
+            Order order = service.Get(1);
+            string name = order.Name;
+            Decimal price = order.FullPrice;
+            DateTime date = order.DateOfOrder;
+            List<Product> listOfProduct = order.ListOfProducts;
+            Client buyer = order.Buyer;
+
+            order.Buyer = new Client();
+            order.DateOfOrder = new DateTime(2015,01,01);
+            order.FullPrice = Decimal.MaxValue;
+            order.Name = Guid.NewGuid().ToString();
+            order.ListOfProducts = new List<Product>();
+           
+             Order newOrder = service.Get(1);
+            Assert.AreEqual(newOrder.Buyer, buyer);
+            Assert.AreEqual(newOrder.DateOfOrder, date);
+            Assert.AreEqual(newOrder.FullPrice, price);
+            Assert.AreEqual(newOrder.ListOfProducts, listOfProduct);
+            Assert.AreEqual(newOrder.Name, name);
+        }
+        [TestMethod]
+        public void GetByIdNotFoundTest()
+        {
+            Order order = service.Get(int.MaxValue);
+            Assert.IsNull(order);
+        }
         [TestMethod]
         public void GetAllTest()
         {
-            var items = service.Get();
-            Assert.IsTrue(items.Count > 0);
+            List<Order> orders = service.Get();
+            Assert.IsNotNull(orders);
+            Assert.IsTrue(orders.Count > 0);
         }
-
         [TestMethod]
-        public void GetItemTest()
+        public void UpdateTest()
         {
-            const int OrderId = 1;
-            var Order = service.Get(OrderId);
-            Assert.IsNotNull(Order);
-            Assert.AreEqual(Order.Id, OrderId);
-        }
-
-        [TestMethod]
-        public void GetItemNotFoundTest()
-        {
-            var Order = service.Get(int.MaxValue);
-            Assert.IsNull(Order);
-        }
-
-        [TestMethod]
-        public void AddItemTest()
-        {
-            var items = service.Get().ToArray();
-            var guid = Guid.NewGuid().ToString();
-            var guPassw = Guid.NewGuid().ToString();
-            var guSurname = Guid.NewGuid().ToString();
-            var guPassportNumber = Guid.NewGuid().ToString();
-            var Order = new Order
-            {
-                Name = guid,
-                //Password = guPassw,
-                //Surname = guSurname,
-                //PassportNumber = guPassportNumber
-
-            };
-
-            service.Add(Order);
-
-            var newItems = service.Get();
-            Assert.IsTrue(items.Length + 1 == newItems.Count);
-
-            var addedOrder = newItems.FirstOrDefault(item => item.Name.Equals(guid));
-
-            Assert.IsNotNull(addedOrder);
-            Assert.IsTrue(addedOrder.Id > 0);
-            Assert.IsTrue(newItems.Select(item => item.Id).Distinct().Count() == newItems.Count);
-        }
-
-        [TestMethod]
-        public void UpdateItemTest()
-        {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Order
-            {
-                Name = "Order2",
-                ListOfProducts = new List<Product>(),
-                FullPrice = 1234,
-                Buyer = new Client(),
-                DateOfOrder = new DateTime(1222, 12, 24),
-            });
-
-            var guid = Guid.NewGuid().ToString();
-
-            item.Name = guid;
-
-            service.Update(item);
-
-            var newItem = service.Get(item.Id);
-
-            Assert.AreEqual(newItem.Name, guid);
+            Order order = service.Get().First();
+            order.Name += "upd";
+            order.FullPrice += 1;
+            order.DateOfOrder =new  DateTime(2015,01,02);
+            service.Update(order);
+            Order updatedOrder = service.Get(order.Id);
+            Assert.IsNotNull(updatedOrder);
+            Assert.AreEqual(updatedOrder.FullPrice, order.FullPrice);
+            Assert.AreEqual(updatedOrder.DateOfOrder, order.DateOfOrder);
+            Assert.AreEqual(updatedOrder.Name, order.Name);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
-        public void UpdateItemNotFoundTest()
+        public void UpdateNotFoundTest()
         {
-            var notFoundOrder = new Order
-            {
-                Id = int.MaxValue,
-                Name = "Some name"
-            };
-
-            service.Update(notFoundOrder);
+            service.Update(new Order { Id = int.MaxValue });
         }
 
         [TestMethod]
-        public void DeleteItemTest()
+        public void DeleteTest()
         {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Order
-            {
-                Name = "Order2",
-                ListOfProducts = new List<Product>(),
-                FullPrice = 1234,
-                Buyer = new Client(),
-                DateOfOrder = new DateTime(1222, 12, 24),
-            });
-            service.Delete(item.Id);
-            var deletedItem = service.Get(item.Id);
-
-            Assert.IsNull(deletedItem);
+            Order order = service.Get().Last();
+            service.Delete(order.Id);
+            Order deletedProduct = service.Get(order.Id);
+            Assert.IsNull(deletedProduct);
         }
+
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
-        public void DeleteItemNotFoundTest()
+        public void DeleteNotFoundTest()
         {
             service.Delete(int.MaxValue);
         }
+
     }
 }

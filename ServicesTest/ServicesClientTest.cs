@@ -2,18 +2,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Services;
 using System.Linq;
-
+using System.Collections.Generic;
 
 namespace ServicesTest
 {
     [TestClass]
     public class ServicesClientTest
     {
-        private ServicesClient service;
+        private readonly ServicesClient service;
 
         public ServicesClientTest()
         {
-            service = new ServicesClient();
+            this.service = new ServicesClient();
             service.Add(new Client
             {
                 Name = "Client1",
@@ -33,121 +33,115 @@ namespace ServicesTest
                 Surname = "SClient2",
             });
         }
-
         [TestMethod]
-        public void GetAllTest()
+        public void AddTest()
         {
-            var items = service.Get();
-            Assert.IsTrue(items.Count > 0);
-        }
+            string login = Guid.NewGuid().ToString();
+            string password = Guid.NewGuid().ToString();
+            string email = Guid.NewGuid().ToString();
+            string name = Guid.NewGuid().ToString();
+            string surname = Guid.NewGuid().ToString();
 
-        [TestMethod]
-        public void GetItemTest()
-        {
-            const int clientId = 1;
-            var client = service.Get(clientId);
-            Assert.IsNotNull(client);
-            Assert.AreEqual(client.Id, clientId);
-        }
-
-        [TestMethod]
-        public void GetItemNotFoundTest()
-        {
-            var client = service.Get(int.MaxValue);
-            Assert.IsNull(client);
-        }
-
-        [TestMethod]
-        public void AddItemTest()
-        {
-            var items = service.Get().ToArray();
-            var guid = Guid.NewGuid().ToString();
-            var guPassw = Guid.NewGuid().ToString();
-            var guSurname = Guid.NewGuid().ToString();
-            var guPassportNumber = Guid.NewGuid().ToString();
-            var client = new Client
-            {
-                Name = guid,
-                Password = guPassw,
-                Surname = guSurname,
-                PassportNumber = guPassportNumber
-
-            };
-
-            service.Add(client);
-
-            var newItems = service.Get();
-            Assert.IsTrue(items.Length + 1 == newItems.Count);
-
-            var addedClient = newItems.FirstOrDefault(item => item.Name.Equals(guid));
-
+            Client newClient = new Client { Email = email, Login = login, Password = password, Surname = surname, Name = name };
+            Client addedClient = service.Add(newClient);
             Assert.IsNotNull(addedClient);
             Assert.IsTrue(addedClient.Id > 0);
-            Assert.IsTrue(newItems.Select(item => item.Id).Distinct().Count() == newItems.Count);
+            Assert.AreEqual(addedClient.Email, email);
+            Assert.AreEqual(addedClient.Login, login);
+            Assert.AreEqual(addedClient.Password, password);
+            Assert.AreEqual(addedClient.Name, name);
+            Assert.AreEqual(addedClient.Surname, surname);
         }
 
-        [TestMethod]
-        public void UpdateItemTest()
-        {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Client
-            {
-                Name = "Test",
-                Login = "Client",
-                Password = "1234",
-                Email = "Client@gmail.com",
-                DateOfBirth = new DateTime(11,11,11),
-                Surname = "SClient",
-                PassportNumber = "1234567890"
-            });
-
-            var guid = Guid.NewGuid().ToString();
-
-            item.Name = guid;
-
-            service.Update(item);
-
-            var newItem = service.Get(item.Id);
-
-            Assert.AreEqual(newItem.Name, guid);
+        [TestMethod] 
+         public void GetByIdTest()
+         { 
+             Client client = service.Get(1); 
+             Assert.IsNotNull(client); 
+             Assert.AreEqual(client.Id, 1); 
+         }
+        [TestMethod] 
+         public void GetByIdEditTest()
+         { 
+             Client client = service.Get(1); 
+             string login = client.Login; 
+             string password = client.Password; 
+             string email = client.Email; 
+             string phoneNumber = client.PhoneNumber;
+            string name = client.Name;
+            string surname = client.Surname;
+            client.Login = Guid.NewGuid().ToString(); 
+             client.Password = Guid.NewGuid().ToString(); 
+             client.Email = Guid.NewGuid().ToString(); 
+             client.PhoneNumber = Guid.NewGuid().ToString(); 
+             Client newClient = service.Get(1); 
+             Assert.AreEqual(newClient.Login, login); 
+             Assert.AreEqual(newClient.Password, password); 
+             Assert.AreEqual(newClient.Email, email); 
+             Assert.AreEqual(newClient.PhoneNumber, phoneNumber);
+            Assert.AreEqual(newClient.Name, name);
+            Assert.AreEqual(newClient.Surname, surname);
+        }
+        [TestMethod] 
+         public void GetByIdNotFoundTest()
+         { 
+            Client client = service.Get(int.MaxValue);
+             Assert.IsNull(client); 
+         }
+        [TestMethod] 
+         public void GetAllTest()
+         { 
+             List<Client> clients = service.Get(); 
+             Assert.IsNotNull(clients); 
+             Assert.IsTrue(clients.Count > 0); 
+         }
+        [TestMethod] 
+         public void UpdateTest()
+         { 
+             Client client = service.Get().First(); 
+             client.Email += "upd"; 
+             client.Login += "upd"; 
+             client.Password += "upd"; 
+             client.PhoneNumber += "upd";
+            client.Name += "upd";
+            client.Surname += "upd";
+            service.Update(client); 
+             Client updatedClient = service.Get(client.Id); 
+             Assert.IsNotNull(updatedClient); 
+             Assert.AreEqual(updatedClient.Email, client.Email); 
+             Assert.AreEqual(updatedClient.Login, client.Login); 
+             Assert.AreEqual(updatedClient.Password, client.Password); 
+             Assert.AreEqual(updatedClient.PhoneNumber, client.PhoneNumber);
+            Assert.AreEqual(updatedClient.Name, client.Name);
+            Assert.AreEqual(updatedClient.Surname, client.Surname);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void UpdateItemNotFoundTest()
-        {
-            var notFoundClient = new Client
-            {
-                Id = int.MaxValue,
-                Name = "Some name"
-            };
+        [TestMethod] 
+         [ExpectedException(typeof(NullReferenceException))] 
+         public void UpdateNotFoundTest()
+         { 
+             service.Update(new Client {Id = int.MaxValue }); 
+         }
 
-            service.Update(notFoundClient);
-        }
+        [TestMethod] 
+         public void DeleteTest()
+         { 
+             Client client = service.Get().Last(); 
+             service.Delete(client.Id); 
+             Client deletedClient = service.Get(client.Id); 
+             Assert.IsNull(deletedClient); 
+         } 
+ 
+ 
+         [TestMethod] 
+         [ExpectedException(typeof(NullReferenceException))] 
+         public void DeleteNotFoundTest()
+         { 
+             service.Delete(int.MaxValue); 
+         } 
 
-        [TestMethod]
-        public void DeleteItemTest()
-        {
-            var item = service.Get().FirstOrDefault() ?? service.Add(new Client
-            {
-                Name = "Test",
-                Login = "Client",
-                Password = "1234",
-                Email = "Client@gmail.com",
-                DateOfBirth = new DateTime(11,11,11),
-                Surname = "SClient",
-                PassportNumber = "1234567890"
-            });
-            service.Delete(item.Id);
-            var deletedItem = service.Get(item.Id);
 
-            Assert.IsNull(deletedItem);
-        }
 
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void DeleteItemNotFoundTest()
-        {
-            service.Delete(int.MaxValue);
-        }
-    }
+
+}
 }

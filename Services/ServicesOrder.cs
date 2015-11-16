@@ -10,7 +10,9 @@ namespace Services
 
         public Order Get(int id)
         {
-            return (Order)listOfOrders.SingleOrDefault(item => item.Id == id).Clone();
+            foreach (Order o in listOfOrders)
+                if (o.Id == id) return (Order)o.Clone();
+            return null;
         }
 
         public List<Order> Get()
@@ -44,13 +46,9 @@ namespace Services
 
         public void Delete(int id)
         {
-            var Order = this.Get(id);
-            if (Order == null)
-            {
-                throw new NullReferenceException();
-            }
-
-            listOfOrders.Remove(Order);
+            Order order = listOfOrders.SingleOrDefault(item => item.Id == id);
+            if (order == null) throw new NullReferenceException();
+            listOfOrders.Remove(order);
         }
     }
 }

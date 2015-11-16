@@ -16,6 +16,17 @@ public class Product : BusinesObject
 
     public override object Clone()
     {
-        throw new NotImplementedException();
+        return new Product
+        {
+            Id = this.Id,
+            Name = this.Name,
+          DateOfCreation=this.DateOfCreation,
+          Characteristics=this.Characteristics,
+          Cost=this.Cost,
+          Discount=this.Discount,
+          Price=this.Price,
+          Producer=this.Producer,
+          Type=this.Type
+        };
     }
 }
