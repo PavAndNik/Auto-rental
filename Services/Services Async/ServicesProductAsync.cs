@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Services_Async
 {
-    class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
+   public class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
     {
         public async Task<Product> AddAsync(Product o)
         {
