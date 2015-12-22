@@ -1,4 +1,5 @@
-﻿using Services.Services_Async;
+﻿using AutoRental.Audit;
+using Services.Services_Async;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,49 +11,46 @@ namespace Services.Services_Async
 {
    public class ServicesClientAsync : ServicesClient, IServicesAsync<Client>
     {
-        public async Task<Client> AddAsync(Client o)
+        private readonly int delay;
+        public ServicesClientAsync(IAuditManager auditManager) : this(5000, auditManager)
+	        {
+	
+	        }
+        public ServicesClientAsync(int delay, IAuditManager auditManager) : base(auditManager)
+	        {
+	            this.delay = delay;
+	        }
+    public async Task<Client> AddAsync(Client o)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Add(o);
-            });
+            await Task.Delay(delay);
+            
+              return base.Add(o);
         }
 
         public async Task<Client> GetAsync(int id)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000); 
-                return base.Get(id);
-            });
+            await Task.Delay(delay);
+            return base.Get(id);
         }
 
         public async Task<List<Client>> GetAsync()
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Get();
-            });
+            await Task.Delay(delay);
+
+             return base.Get();
         }
 
         public async Task<Client> UpdateAsync(Client o)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Update(o);
-            });
+            await Task.Delay(delay);
+           
+             return base.Update(o);
         }
 
         public async Task DeleteAsync(int id)
         {
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                base.Delete(id);
-            });
+            await Task.Delay(delay);
+            base.Delete(id);
         }
 
     }

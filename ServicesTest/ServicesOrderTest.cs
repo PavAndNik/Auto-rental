@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Services;
 using System.Linq;
 using System.Collections.Generic;
+using Services.AuditServices;
 
 namespace ServicesTest
 {
@@ -13,7 +14,7 @@ namespace ServicesTest
 
         public ServicesOrderTest()
         {
-            this.service = new ServicesOrder();
+            this.service = new ServicesOrder(new AuditManager());
             service.Add(new Order
             {
                 Name = "Order1",

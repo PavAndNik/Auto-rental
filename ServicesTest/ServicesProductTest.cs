@@ -4,7 +4,7 @@ using Services;
 using System.Linq;
 using System.Collections.Generic;
 using AutoRental.Model;
-
+using Services.AuditServices;
 
 namespace ServicesTest
 {
@@ -15,7 +15,7 @@ namespace ServicesTest
 
         public ServicesProductTest()
         {
-            this.service = new ServicesProduct();
+            this.service = new ServicesProduct(new AuditManager());
             service.Add(new Product
             {
                 Name = "Product1",

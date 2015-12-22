@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit\AccessType.cs" />
+    <Compile Include="Audit\DataAccessEventArgs.cs" />
+    <Compile Include="Audit\IAuditManager.cs" />
     <Compile Include="Model\Basic Model\BusinesObject.cs" />
     <Compile Include="Model\Basic Model\Role.cs" />
     <Compile Include="Model\Basic Model\User.cs" />

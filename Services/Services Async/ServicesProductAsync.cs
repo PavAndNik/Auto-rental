@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoRental.Audit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,49 +10,46 @@ namespace Services.Services_Async
 {
    public class ServicesProductAsync : ServicesProduct,IServicesAsync<Product>
     {
+        private readonly int delay;
+        public ServicesProductAsync(IAuditManager auditManager) : this(5000, auditManager)
+	        {
+
+        }
+        public ServicesProductAsync(int delay, IAuditManager auditManager) : base(auditManager)
+	        {
+            this.delay = delay;
+        }
         public async Task<Product> AddAsync(Product o)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Add(o);
-            });
+            await Task.Delay(delay);
+
+            return base.Add(o);
         }
 
         public async Task<Product> GetAsync(int id)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Get(id);
-            });
+            await Task.Delay(delay);
+            return base.Get(id);
         }
 
         public async Task<List<Product>> GetAsync()
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Get();
-            });
+            await Task.Delay(delay);
+
+            return base.Get();
         }
 
         public async Task<Product> UpdateAsync(Product o)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                return base.Update(o);
-            });
+            await Task.Delay(delay);
+
+            return base.Update(o);
         }
 
         public async Task DeleteAsync(int id)
         {
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(5000);
-                base.Delete(id);
-            });
+            await Task.Delay(delay);
+            base.Delete(id);
         }
     }
 }

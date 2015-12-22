@@ -4,6 +4,7 @@ using Services;
 using System.Linq;
 using System.Collections.Generic;
 using Services.Services_Async;
+using Services.AuditServices;
 
 namespace ServicesTest
 {
@@ -15,7 +16,7 @@ namespace ServicesTest
 
         public ServicesClientTestAsync()
         {
-            this.service = new ServicesClientAsync();
+            this.service = new ServicesClientAsync(new AuditManager());
 
             service.AddAsync(new Client
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoRental.Audit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,16 +8,23 @@ namespace Services
     public class ServicesOrder
     {
         private static List<Order> listOfOrders = new List<Order>();
+        private readonly IAuditManager auditManager;
 
+        public ServicesOrder(IAuditManager auditManager)
+        {
+            this.auditManager = auditManager;
+        }
         public Order Get(int id)
         {
             foreach (Order o in listOfOrders)
                 if (o.Id == id) return (Order)o.Clone();
+            this.auditManager.Access(typeof(Order), AccessType.Read);
             return null;
         }
 
         public List<Order> Get()
         {
+            this.auditManager.Access(typeof(Order), AccessType.Read);
             return listOfOrders;
         }
 
@@ -24,6 +32,7 @@ namespace Services
         {
             OrderForAdd.Id = listOfOrders.Any() ? listOfOrders.Max(item => item.Id) + 1 : 1;
             listOfOrders.Add(OrderForAdd);
+            this.auditManager.Access(typeof(Order), AccessType.Add);
             return (Order)OrderForAdd.Clone();
         }
 
@@ -41,6 +50,8 @@ namespace Services
             Order.Buyer = OrderForUpdate.Buyer;
             Order.DateOfOrder = OrderForUpdate.DateOfOrder;
 
+            this.auditManager.Access(typeof(Order), AccessType.Update);
+
             return (Order)Order.Clone();
         }
 
@@ -49,6 +60,8 @@ namespace Services
             Order order = listOfOrders.SingleOrDefault(item => item.Id == id);
             if (order == null) throw new NullReferenceException();
             listOfOrders.Remove(order);
+
+            this.auditManager.Access(typeof(Order), AccessType.Delete);
         }
     }
 }

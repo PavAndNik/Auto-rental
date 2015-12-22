@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Services.Services_Async;
 using AutoRental.Model;
+using Services.AuditServices;
 
 namespace ServicesTest
 {
@@ -16,7 +17,7 @@ namespace ServicesTest
 
         public ServicesProductTestAsync()
         {
-            this.service = new ServicesProductAsync();
+            this.service = new ServicesProductAsync(new AuditManager());
 
             service.AddAsync(new Product
             {
