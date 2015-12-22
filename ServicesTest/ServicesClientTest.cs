@@ -17,7 +17,7 @@ namespace ServicesTest
             this.service = new ServicesClient(new AuditManager());
             service.Add(new Client
             {
-                Name = "Client1",
+                Name = "Client13",
                 Login = "Client1",
                 Password = "1234",
                 Email = "Client@gmail.com",
