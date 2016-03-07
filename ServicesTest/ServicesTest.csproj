@@ -63,9 +63,9 @@
       <Project>{dcd7e286-c080-421e-824e-8ff3de1977e5}</Project>
       <Name>AutoRental</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
+    <ProjectReference Include="..\Services\AutoRental.Services.Static.csproj">
       <Project>{6d45fc9f-81cc-45de-ac37-7391263439db}</Project>
-      <Name>Services</Name>
+      <Name>AutoRental.Services.Static</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
