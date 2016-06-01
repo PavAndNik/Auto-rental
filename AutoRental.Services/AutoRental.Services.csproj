@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Data.Entity.Design.Extensibility, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesClientAsync.cs" />
     <Compile Include="ServicesOrderAsync.cs" />
+    <Compile Include="ServicesOrderItemAsync.cs" />
     <Compile Include="ServicesProductAsync.cs" />
+    <Compile Include="ServicesProductCharacteristicAsync.cs" />
+    <Compile Include="ServicesProductValueCharacteristicAsync.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoRental.Data.EF\AutoRental.Data.EF.csproj">
@@ -56,10 +70,9 @@
       <Project>{43b72a38-63fd-4668-964d-221696bf894e}</Project>
       <Name>AutoRental.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AutoRental\AutoRental.csproj">
-      <Project>{dcd7e286-c080-421e-824e-8ff3de1977e5}</Project>
-      <Name>AutoRental</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

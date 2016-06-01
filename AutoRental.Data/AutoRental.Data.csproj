@@ -43,15 +43,21 @@
     <Compile Include="Common\IReadOnlyRepository.cs" />
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="IClientRepository.cs" />
+    <Compile Include="IOrderItemRepository.cs" />
     <Compile Include="IOrderRepository.cs" />
+    <Compile Include="IProductCharacteristicRepository.cs" />
+    <Compile Include="IProductValueCharacteristicRepository.cs" />
     <Compile Include="IProductRepository.cs" />
+    <Compile Include="Model\Characteristic.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\Common\BaseModel.cs" />
+    <Compile Include="Model\Common\Role.cs" />
+    <Compile Include="Model\Common\User.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderItem.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductValueCharacteristic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AutoRental\AutoRental.csproj">
-      <Project>{dcd7e286-c080-421e-824e-8ff3de1977e5}</Project>
-      <Name>AutoRental</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

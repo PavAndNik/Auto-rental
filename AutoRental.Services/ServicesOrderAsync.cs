@@ -1,4 +1,6 @@
-﻿using AutoRental.Data.EF;
+﻿using AutoRental.Data;
+using AutoRental.Data.EF;
+using AutoRental.Data.Model;
 using AutoRental.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,7 @@ namespace AutoRental.Services
 {
       public class ServicesOrderAsync : DomainServiceAsync<Order>
     {
-        private readonly List<Order> entities = new List<Order>();
-
-        public ServicesOrderAsync(OrderRepository repository) : base(repository)
+              public ServicesOrderAsync(IOrderRepository repository) : base(repository)
         {
 
         }

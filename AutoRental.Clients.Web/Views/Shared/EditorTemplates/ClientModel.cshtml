@@ -1,0 +1,85 @@
+﻿@model AutoRental.Clients.Web.Models.Clients.ClientModel
+
+<div class="form-horizontal">
+    <h4>ClientModel</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Login)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfBirth)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateOfBirth)
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Surname)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Surname)
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DriverLicenseNumber)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DriverLicenseNumber)
+            @Html.ValidationMessageFor(model => model.DriverLicenseNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PassportNumber)
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PassportNumber)
+            @Html.ValidationMessageFor(model => model.PassportNumber)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+

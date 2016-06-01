@@ -1,0 +1,25 @@
+﻿@using AutoRental.Resources
+@{
+    ViewBag.Title = Common.HomePage;
+}
+
+<div class="jumbotron">
+    <h1>@Common.AutoRental</h1>
+    <p class="lead">@Common.AutoRental</p>
+    <p><a href="~/Views/Home/Index.cshtml" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Navigation.Products</h2>
+        <p><a class="btn btn-default" href="Products">@Navigation.Products &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Common.Information</h2>
+        @Html.ActionLink("About", "About", "Home")
+        @Html.ActionLink("About", "Index", "Home")
+        <p><a class="btn btn-default" href="About">@Common.About &raquo;</a></p>
+        <p><a class="btn btn-default" href="Contact">@Common.Contact &raquo;</a></p>
+    </div>
+   
+</div>

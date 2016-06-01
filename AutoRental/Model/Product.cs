@@ -12,7 +12,7 @@ public class Product : BusinesObject
     public string Producer { get; set; }
     public int Discount { get; set; }
     public Decimal Price { get; set; }
-    public List<Characteristic> Characteristics {get; set; }
+    public List<ProductCharacteristic> Characteristics {get; set; }
 
     public override object Clone()
     {

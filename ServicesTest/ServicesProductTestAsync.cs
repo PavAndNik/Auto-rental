@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Services;
 using System.Linq;
 using System.Collections.Generic;
-using Services.Services_Async;
-using AutoRental.Model;
-using Services.AuditServices;
+using AutoRental.Services;
+using AutoRental.Data.EF;
+using AutoRental.Data.Model;
 
 namespace ServicesTest
 {
@@ -17,12 +16,11 @@ namespace ServicesTest
 
         public ServicesProductTestAsync()
         {
-            this.service = new ServicesProductAsync(new AuditManager());
+            this.service = new ServicesProductAsync(new ProductRepository(new DataContext("defaultconnection")));
 
             service.AddAsync(new Product
             {
                 Name = "Product1",
-                Characteristics = new List<Characteristic>(),
                 Cost = 1000,
                 DateOfCreation = new DateTime(2001, 01, 01),
                 Discount = 10,
@@ -33,8 +31,7 @@ namespace ServicesTest
             service.AddAsync(new Product
             {
                 Name = "Product2",
-                Characteristics = new List<Characteristic>(),
-                Cost = 2000,
+                        Cost = 2000,
                 DateOfCreation = new DateTime(2002, 02, 02),
                 Discount = 20,
                 Price = 2000000,
@@ -49,13 +46,13 @@ namespace ServicesTest
             string name = Guid.NewGuid().ToString();
             int price = 1000001;
             DateTime dateOfCreation = new DateTime(2015, 10, 10);
-            List<Characteristic> characteristics = new List<Characteristic>();
+           
             int cost = 1000;
             int discount = 10;
             string producer = Guid.NewGuid().ToString();
             string type = Guid.NewGuid().ToString();
 
-            Product newProduct = new Product { Name = name, Characteristics = characteristics, Cost = cost, DateOfCreation = dateOfCreation, Discount = discount, Price = price, Producer = producer, Type = type };
+            Product newProduct = new Product { Name = name, Cost = cost, DateOfCreation = dateOfCreation, Discount = discount, Price = price, Producer = producer, Type = type };
             var addedProductTask= service.AddAsync(newProduct);
             Product addedProduct = addedProductTask.Result;
             Assert.IsNotNull(addedProduct);
@@ -66,7 +63,7 @@ namespace ServicesTest
             Assert.AreEqual(addedProduct.Name, name);
             Assert.AreEqual(addedProduct.Cost, cost);
             Assert.AreEqual(addedProduct.DateOfCreation, dateOfCreation);
-            Assert.AreEqual(addedProduct.Characteristics, characteristics);
+          
             Assert.AreEqual(addedProduct.Discount, discount);
         }
 
@@ -78,39 +75,7 @@ namespace ServicesTest
             Assert.AreEqual(product.Id, 1);
         }
 
-         
-         [TestMethod] 
-        public void GetByIdEditTestAsync()
-         { 
-            Product product = service.GetAsync(1).Result;
-            string name = product.Name;
-            Decimal price = product.Price;
-            DateTime dateOfCreation = product.DateOfCreation;
-            List<Characteristic> characteristics = product.Characteristics;
-            int cost = product.Cost;
-            int discount = product.Discount;
-            string producer = product.Producer;
-            string type = product.Type;
-
-            product.Price = Decimal.MaxValue;
-            product.Name = Guid.NewGuid().ToString();
-            product.DateOfCreation = new DateTime(2015, 10, 10);
-            product.Characteristics = new List<Characteristic>();
-            product.Cost = 1000;
-            product.Discount = 10;
-            product.Producer = Guid.NewGuid().ToString();
-            product.Type = Guid.NewGuid().ToString();
-
-            Product newProduct = service.GetAsync(1).Result;
-            Assert.AreEqual(newProduct.Cost, cost);
-            Assert.AreEqual(newProduct.DateOfCreation, dateOfCreation);
-            Assert.AreEqual(newProduct.Price, price);
-            Assert.AreEqual(newProduct.Characteristics, characteristics);
-            Assert.AreEqual(newProduct.Name, name);
-            Assert.AreEqual(newProduct.Discount, discount);
-            Assert.AreEqual(newProduct.Producer, producer);
-            Assert.AreEqual(newProduct.Type, type);
-        }
+       
 
         [TestMethod] 
          public void GetByIdNotFoundTestAsync()

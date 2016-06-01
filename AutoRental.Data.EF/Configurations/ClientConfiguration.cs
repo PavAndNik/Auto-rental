@@ -1,4 +1,5 @@
 ﻿using AutoRental.Data.EF.Configurations.Common;
+using AutoRental.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;

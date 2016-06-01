@@ -35,7 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Data.Entity.Design.Extensibility, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.SqlXml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,23 +63,34 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ClientServiceAsyncTests.cs" />
+    <Compile Include="OrderItemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServicesProductTestAsync.cs" />
     <Compile Include="ServicesOrderTestAsync.cs" />
-    <Compile Include="ServicesClientTestAsync.cs" />
-    <Compile Include="ServicesClientTest.cs" />
-    <Compile Include="ServicesOrderTest.cs" />
-    <Compile Include="ServicesProductTest.cs" />
+    <Compile Include="ServicesProductTestAsync.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoRental\AutoRental.csproj">
-      <Project>{dcd7e286-c080-421e-824e-8ff3de1977e5}</Project>
-      <Name>AutoRental</Name>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoRental.Data.EF\AutoRental.Data.EF.csproj">
+      <Project>{ac83f1f3-3c7c-4830-bca0-dd1ea592c85f}</Project>
+      <Name>AutoRental.Data.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\AutoRental.Services.Static.csproj">
-      <Project>{6d45fc9f-81cc-45de-ac37-7391263439db}</Project>
-      <Name>AutoRental.Services.Static</Name>
+    <ProjectReference Include="..\AutoRental.Data\AutoRental.Data.csproj">
+      <Project>{43b72a38-63fd-4668-964d-221696bf894e}</Project>
+      <Name>AutoRental.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AutoRental.Services\AutoRental.Services.csproj">
+      <Project>{9fa407f7-51dc-4a40-b8e1-89dc0cbf4b59}</Project>
+      <Name>AutoRental.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,0 +1,74 @@
+﻿@using AutoRental.Resources
+@using AutoRental.Resources.Entities
+@model IEnumerable<AutoRental.Clients.Web.Models.Products.ProductModel>
+
+@{
+    ViewBag.Title = Product.TitleList;
+}
+
+<h2>@Product.TitleList</h2>
+
+<p>
+    @Html.ActionLink(Buttons.Create, "New")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfCreation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfCreation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Producer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink(Buttons.Edit, "Index", new { id = item.Id, controller = "Product" })
+            @using (Html.BeginRouteForm(new { action = "Index", controller = "Product", id = @item.Id }))
+            {
+                @Html.HttpMethodOverride("DELETE")
+                <input type="submit" value="@Buttons.Delete" />
+            }
+        </td>
+    </tr>
+}
+
+</table>

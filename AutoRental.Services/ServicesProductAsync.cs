@@ -1,4 +1,6 @@
-﻿using AutoRental.Data.EF;
+﻿using AutoRental.Data;
+using AutoRental.Data.EF;
+using AutoRental.Data.Model;
 using AutoRental.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,8 @@ namespace AutoRental.Services
 {
     public class ServicesProductAsync : DomainServiceAsync<Product>
     {
-        private readonly List<Product> entities = new List<Product>();
-
-        public ServicesProductAsync(ProductRepository repository) : base(repository)
+       
+        public ServicesProductAsync(IProductRepository repository) : base(repository)
         {
 
         }

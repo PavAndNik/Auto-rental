@@ -1,4 +1,5 @@
 ﻿using AutoRental.Data.EF.Configurations.Common;
+using AutoRental.Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -19,7 +20,9 @@ namespace AutoRental.Data.EF.Configurations
             Property(p => p.Cost).IsRequired();
             Property(p => p.DateOfCreation).IsRequired();
             Property(p => p.Discount).IsRequired();
-            HasRequired(m => m.Characteristics).WithMany().HasForeignKey(m => m.Id); //Тут возможно ошибка
+
+            //HasMany(m => m.Characteristics).WithRequired().Map(m => m.MapKey("ProductCharacteristicConfigurationId"));
+
         }
     }
 }
